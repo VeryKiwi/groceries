@@ -8,7 +8,7 @@ local-config.ini
 *.sublime-workspace
 ignore/
 mongo-dumps/
+tmp/
 # I think they say in theory you should commit package-lock but until we start doing that we will ignore it.
 package-lock.json
-tmp/
 
