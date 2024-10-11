@@ -10,6 +10,8 @@ This code is meant to collect recipes for various meals and allow convenient man
 ## quick notes
 - Groceries server and MongoDB are both on the FUJI server (159.89.229.227).
 - learnnation.org is the FUJI server.
+- If you get error `Permission denied (publickey)`, you may need to manually run `ssh-add ~/.ssh/fuji_groceries` because changes not propogated to extant tabs, or ask Matt.
+- Latest working deployed commit hash: `6f7a2fa7c4769f47b8792fab4c1a49447521ccd1`.  If something fails we can revert to that.
 
 
 ## set up mongo
