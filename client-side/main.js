@@ -132,7 +132,7 @@ function initAccountWindow() {
 	// Any account init things needed...
 
 	// set random background for login screen
-	let image_fnames = ['maki.jpg', 'masala.jpg', 'naan.jpg', 'tomato.jpg', 'veggie.jpg']
+	let image_fnames = ['charcuterie.jpg', 'figs.jpg', 'maki.jpg', 'masala.jpg', 'naan.jpg', 'pastry.jpg', 'peaches.jpg', 'peppers.jpg', 'pumpkin.jpg', 'steak.jpg', 'tea.jpg', 'wine.jpg']
 	let rand_index = Math.floor(Math.random() * image_fnames.length)
 	let image_url = 'static/backgrounds/' + image_fnames[rand_index]
 	// alert('setting')
