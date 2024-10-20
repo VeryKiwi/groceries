@@ -20,6 +20,23 @@ function initGlobals() {
 }
 
 function initTriggers() {
+	/* Global */
+	// Uncomment this if you are developing and want to be alerted with all errors, but they should appear in the console anyway without any of this code.
+	/*
+	$(window).on("error", function(evt) {
+		console.log("jQuery error event:", evt)
+		var e = evt.originalEvent // get the javascript event
+		console.log("original event:", e)
+		if (e.message) {
+			console.log("Error:\n\t" + e.message + "\nLine:\n\t" + e.lineno + "\nFile:\n\t" + e.filename)
+		} else {
+			console.log("Error:\n\t" + e.type + "\nElement:\n\t" + (e.srcElement || e.target))
+		}
+	})
+	*/
+
+
+
 	/* Account Window */
 	$('.AccountTab').click(function(){
 		account.switchTab(this)
@@ -43,6 +60,8 @@ function initTriggers() {
 			}
 		}
 	})
+
+
 
 	/* Account Management / Bar */
 	$('#accountButton').click(function(){
@@ -84,8 +103,8 @@ function initTriggers() {
 		recipe.keyPress(key, type, inName)
 
 	})
-
 	$("#instr_input").blur(function(event){recipe.saveInstructions()})
+
 
 
 	/***** search area *****/
@@ -107,7 +126,6 @@ function initTriggers() {
 		groceryArea.menuCloset.removeNode(node)
 		searchArea.launchSearch()
 	})
-
 
 
 
