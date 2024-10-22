@@ -23,7 +23,7 @@ class ServerTalk {
 		// Try to login if there is enough information
 
 		// program to check cookies for old login information
-}
+	}
 
 	// Send a request to the server
 	send(command, data, responseFunction = false) {

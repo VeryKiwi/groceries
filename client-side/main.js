@@ -46,7 +46,12 @@ function initTriggers() {
 			$('#password').focus()
 		}
 	})
-	$('#loginButton').click(account.loginPress.bind(account))
+	$('#loginButton').click(function(){
+		console.log('clicked login button')
+		//account.loginPress()
+		account.loginPress.bind(account)()
+		console.log('post loginPress call')
+	})
 	$('#password').keypress(function(event){
 		if( event.which === 13 /*Enter*/ ){
 			account.loginPress()

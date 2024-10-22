@@ -2,6 +2,7 @@
 
 class UserAccount {
 	constructor(graph) {
+		console.log('constructing account')
 		this.username = ""
 		this.guest = false
 		this.tab = {
@@ -46,6 +47,7 @@ class UserAccount {
 
 	// Activates when login/signup button is activated. Figure out which action it is and proceed
 	loginPress() {
+		console.log('loginPress()')
 		var tab = this.selectedTab
 		if (tab === "login") {
 			this.serverLogin()
@@ -57,6 +59,7 @@ class UserAccount {
 
 	// Deal with Logging in
 	serverLogin() {
+		console.log('serverLogin()')
 		// First Read the username and password fields
 		$("#loginResponse").html('') // clear message
 		let username = $("#username").val()
@@ -65,9 +68,7 @@ class UserAccount {
 			"username" : username,
 			"password" : userpass,
 		}
-
 		server.send("login", outData, this.login.bind(this))
-
 	}
 	// Handle login information from the server
 	login(inData) {

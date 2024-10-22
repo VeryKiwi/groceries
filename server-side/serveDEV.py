@@ -160,12 +160,25 @@ class JSSocketHandler (RequestHandler):
 
 
 	def get(self):
-		self.render(path.join(CLIENT_SIDE_DIRECTORY_PATH, "socket.js"), host=self.request.host)
+		self.render(path.join(CLIENT_SIDE_DIRECTORY_PATH, "socketDEV.js"), host=self.request.host)
+
+
+class TalkHandler (RequestHandler):
+	""" This handler replaces the old JSSocketHandler used to talk to server-talk.js """
+	def put(self):
+		print('TalkHandler get()')
+		#self.write('i heard you')
+		self.write(json.dumps({
+			'command': 'commmmand',
+			'data': 'dattta',
+		}))
+
 
 
 def make_app():
 	return Application(
 		[
+			url(r'/mySocket', TalkHandler, {}, name = 'talk'),
 			url(r'/mySocket', SocketHandler, {} , name = "a"),
 			url(r'/socket\.js', JSSocketHandler, {}, name = "b"),
 			url(r'/?', RedirectHandler, { "url": "index.html" }),
