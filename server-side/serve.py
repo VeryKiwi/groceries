@@ -160,6 +160,8 @@ class JSSocketHandler (RequestHandler):
 
 
 	def get(self):
+		# Set the MIME type to JavaScript since we are returning JavaScript
+		self.set_header("Content-Type", 'text/javascript; charset="utf-8"')
 		self.render(path.join(CLIENT_SIDE_DIRECTORY_PATH, "socket.js"), host=self.request.host)
 
 
