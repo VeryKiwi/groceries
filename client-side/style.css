@@ -1,6 +1,10 @@
 /* GLOBAL SETTINGS (like a Normalize) */
 html {
 	font-family: -apple-system, Helvetica, Arial, sans-serif;
+	height: 100%;
+}
+body {
+	height: 100%;
 }
 
 
