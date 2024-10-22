@@ -146,14 +146,11 @@ function initTriggers() {
 
 }
 
-function initAccountWindow() {
-	// Any account init things needed...
-
+function initBackgroundImage() {
 	// set random background for login screen
 	let image_fnames = ['charcuterie.jpg', 'figs.jpg', 'maki.jpg', 'masala.jpg', 'naan.jpg', 'pastry.jpg', 'peaches.jpg', 'peppers.jpg', 'pumpkin.jpg', 'steak.jpg', 'tea.jpg', 'wine.jpg']
 	let rand_index = Math.floor(Math.random() * image_fnames.length)
 	let image_url = 'static/backgrounds/' + image_fnames[rand_index]
-	// alert('setting')
 	$('#AccountWindow').css({'background-image': 'url(' + image_url + ')'})
 }
 
@@ -206,9 +203,9 @@ function windowManage(cmds) {
 ////////////////////// MAIN //////////////////////
 $(document).ready(function(){
 	// jquery wait till dom loaded (see https://avaminzhang.wordpress.com/2013/06/11/document-ready-vs-window-load/ if any issues)
+	initBackgroundImage() // does not use any globals so I'm putting it first so the background image can load as quickly as possible
 	initGlobals()
 	initTriggers()
-	initAccountWindow()
 
 	windowManage({
 		"account" : true,
