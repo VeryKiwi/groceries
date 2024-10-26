@@ -148,7 +148,9 @@ function initTriggers() {
 
 function initBackgroundImage() {
 	// set random background for login screen
-	let image_fnames = ['charcuterie.jpg', 'figs.jpg', 'maki.jpg', 'masala.jpg', 'naan.jpg', 'pastry.jpg', 'peaches.jpg', 'peppers.jpg', 'pumpkin.jpg', 'steak.jpg', 'tea.jpg', 'wine.jpg']
+	//let image_bnames = ['charcuterie', 'figs', 'maki', 'masala', 'naan', 'pastry', 'peaches', 'peppers', 'pumpkin', 'steak', 'tea', 'wine']
+	let image_bnames = ['maki']
+	let image_fnames = image_bnames.map((s) => s + '.webp')
 	let rand_index = Math.floor(Math.random() * image_fnames.length)
 	let image_url = 'static/backgrounds/' + image_fnames[rand_index]
 	$('#AccountWindow').css({'background-image': 'url(' + image_url + ')'})
