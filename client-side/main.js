@@ -55,7 +55,7 @@ function initTriggers() {
 	$('#guestButton').click(account.guestLogin.bind(account))
 	$(document).keyup(function(event){
 		if( event.which === 27 /*Escape*/ ){
-			if (account.username === "" && account.guest === false) {
+			if (account.username === "") {
 				account.guestLogin()
 			}
 		}

@@ -3,7 +3,6 @@
 class UserAccount {
 	constructor(graph) {
 		this.username = ""
-		this.guest = false
 		this.tab = {
 			login: $("#AccountTab_login"),
 			signup: $("#AccountTab_signup"),
@@ -55,6 +54,18 @@ class UserAccount {
 
 	}
 
+	// Guest login is identical to serverLogin below but we use the guest demo user username and password.
+	guestLogin() {
+		// First Read the username and password fields
+		$("#loginResponse").html('') // clear message
+		let username = 'guest'
+		let userpass = 'guest'
+		let outData = {
+			"username" : username,
+			"password" : userpass,
+		}
+		server.send("login", outData, this.login.bind(this))
+	}
 	// Deal with Logging in
 	serverLogin() {
 		// First Read the username and password fields
@@ -71,37 +82,26 @@ class UserAccount {
 	}
 	// Handle login information from the server
 	login(inData) {
-		let success = inData.status;
-		if (!success) { // unsuccessful
+		let success = inData.status
+		// Unsuccessful login
+		if (!success) {
 			$("#loginResponse").html("Unsuccessful Login Attempt")
 			return
 		}
-
 		// Successfully logged in
 		let username = inData.username;
 		this.username = username;
 		$("#accountButton").val("Welcome " + username)
-
 		windowManage({
 			"account" : false,
 			"recipeDesc" : false,
 		})
 		$("#username").val("")
 		$("#password").val("")
-
 		// Import all of the users data from the server
-		this.importData(inData.data);
+		this.importData(inData.data)
+	}
 
-	}
-	guestLogin() {
-		// no actual logging in occurs.  local javascript runs as usual.
-		windowManage({
-			"account" : false,
-			"recipeDesc" : false,
-		})
-		this.guest = true
-		server.mute = true
-	}
 	// Create a new user account
 	signup() {
 		// First check the username
@@ -159,13 +159,8 @@ class UserAccount {
 
 	// Log the user out
 	logout() {
-		if (this.guest === false) {
-			server.send("logout", {})
-			this.username = ""
-		} else {
-			this.guest = false
-			this.mute = false
-		}
+		server.send("logout", {})
+		this.username = ""
 		graph.wipe()
 		server.queries = {}
 		$("input[type='text']").val("")
