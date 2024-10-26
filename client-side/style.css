@@ -5,7 +5,11 @@ html {
 }
 body {
 	height: 100%;
+	/* settings that used to be in AccountWindow because it held the bg image and now are here */
+	background-size: cover;
+	background-position: center center;
 }
+
 
 
 
@@ -16,10 +20,6 @@ body {
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	background-color: #CCC; /* backup color if background image fails to load */
-	background-image: none; /* javascript will populate an image here */
-	background-size: cover;
-	background-position: center center;
 	z-index: 5;
 }
 #AccountBar {

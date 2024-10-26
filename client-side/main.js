@@ -1,3 +1,5 @@
+
+
 //////////////////// GLOBALS ////////////////////
 let account = undefined
 let graph = undefined
@@ -148,12 +150,12 @@ function initTriggers() {
 
 function initBackgroundImage() {
 	// set random background for login screen
-	//let image_bnames = ['charcuterie', 'figs', 'maki', 'masala', 'naan', 'pastry', 'peaches', 'peppers', 'pumpkin', 'steak', 'tea', 'wine']
-	let image_bnames = ['maki']
+	let image_bnames = ['charcuterie', 'figs', 'maki', 'masala', 'naan', 'pastry', 'peaches', 'peppers', 'pumpkin', 'steak', 'tea', 'wine']
+	//let image_bnames = ['maki']
 	let image_fnames = image_bnames.map((s) => s + '.webp')
 	let rand_index = Math.floor(Math.random() * image_fnames.length)
 	let image_url = 'static/backgrounds/' + image_fnames[rand_index]
-	$('#AccountWindow').css({'background-image': 'url(' + image_url + ')'})
+	document.body.style.backgroundImage = 'url(' + image_url + ')'
 }
 
 // Manage what windows are shown / hidden in html window
@@ -205,9 +207,8 @@ function windowManage(cmds) {
 ////////////////////// MAIN //////////////////////
 $(document).ready(function(){
 	// jquery wait till dom loaded (see https://avaminzhang.wordpress.com/2013/06/11/document-ready-vs-window-load/ if any issues)
-
-	// TODO: if we eliminate the use of jQuery for the background image, we may not need to wait for document.ready, which could speed things up.
-	initBackgroundImage() // does not use any globals so I'm putting it first so the background image can load as quickly as possible
+	// NOTE: body is part of the DOM so it seems we do need to wait for document.ready before loading this. I don't know if we can do anything more in that regard.
+	initBackgroundImage() // This function does not use globals so I'm putting it first so that the background image can load as quickly as possible.
 	initGlobals()
 	initTriggers()
 
