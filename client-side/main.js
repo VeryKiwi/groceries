@@ -203,6 +203,8 @@ function windowManage(cmds) {
 ////////////////////// MAIN //////////////////////
 $(document).ready(function(){
 	// jquery wait till dom loaded (see https://avaminzhang.wordpress.com/2013/06/11/document-ready-vs-window-load/ if any issues)
+
+	// TODO: if we eliminate the use of jQuery for the background image, we may not need to wait for document.ready, which could speed things up.
 	initBackgroundImage() // does not use any globals so I'm putting it first so the background image can load as quickly as possible
 	initGlobals()
 	initTriggers()
@@ -214,3 +216,4 @@ $(document).ready(function(){
 	})
 	$(".start_hidden").removeClass("start_hidden") // only need this class during page loading (to hide elements as they load)
 })
+
