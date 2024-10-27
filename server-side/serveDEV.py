@@ -13,7 +13,7 @@ from tornado.log import enable_pretty_logging
 from database import DB
 
 IMAGE_DIRECTORY_PATH = "../images/"
-CLIENT_SIDE_DIRECTORY_PATH = "../client-side-built/"
+CLIENT_SIDE_DIRECTORY_PATH = "../client-side/"
 GROCERIES_PORT_NUMBER = 8244
 
 
