@@ -11,6 +11,8 @@ This code is meant to collect recipes for various meals and allow convenient man
 - Groceries server and MongoDB are both on the FUJI server (159.89.229.227).
 - learnnation.org is the FUJI server.
 - If you get error `Permission denied (publickey)`, you may need to manually run `ssh-add ~/.ssh/fuji_groceries` because changes not propogated to extant tabs, or ask Matt.
+- jpg compression: https://www.iloveimg.com/compress-image/compress-jpg
+- jpg to webp conversion: https://cloudconvert.com/jpg-to-webp
 
 
 ## set up mongo
