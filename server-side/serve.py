@@ -1,3 +1,10 @@
+# Example command to kick off prod server:
+# python2 serve.py 
+#
+# Example command to kick off dev server:
+# python2 serve.py "../client-side/" 8244
+#
+import sys
 import json
 from os import path
 
@@ -13,8 +20,12 @@ from tornado.log import enable_pretty_logging
 from database import DB
 
 IMAGE_DIRECTORY_PATH = "../images/"
-CLIENT_SIDE_DIRECTORY_PATH = "../client-side-built/"
-GROCERIES_PORT_NUMBER = 8243
+# -- first argument is serve.py
+sys.argv.pop(0)
+# -- second argument is the client side dir path to serve
+CLIENT_SIDE_DIRECTORY_PATH = sys.argv.pop(0) if sys.argv else "../client-side-built/"
+# -- third argument is the port number to serve at
+GROCERIES_PORT_NUMBER = sys.argv.pop(0) if sys.argv else 8243
 
 
 class SocketHandler (WebSocketHandler):
