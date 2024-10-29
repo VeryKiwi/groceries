@@ -42,7 +42,7 @@ class SocketHandler (WebSocketHandler):
 	def on_message(self, message):
 		# Convert things to be more friendly.  Check for good input.
 		assert type(message) in [str, unicode]
-		print 'got message: {0}'.format(message)
+		print 'got message: {0}'.format(message.encode('utf-8'))
 		message_dict = json.loads(message)
 		assert type(message_dict) == dict
 		# Check to ensure a command is received
