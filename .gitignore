@@ -16,4 +16,6 @@ package-lock.json
 tmux-client*
 # I don't think I want to actually check in my idea background images, only the ones that are actually in use at the moment
 client-side/static/background-ideas/
+# I'm experimenting trying to get the server to support https and I put that folder in here so I'm going to just ignore it.
+https_play/
 
