@@ -1,7 +1,7 @@
 # groceries
-Menu Organizer
+Menu Organizer.  Access [here](http://learnnation.org:8243)!
 
-Access groceries [here](http://learnnation.org:8243)!
+![](banner-black.png)
 
 This code is meant to collect recipes for various meals and allow convenient management of those recipes.
 
