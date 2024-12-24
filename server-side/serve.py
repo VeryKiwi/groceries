@@ -152,11 +152,11 @@ class SocketHandler (WebSocketHandler):
 			response["data"] = self.db.load()
 			print 'Sent full data back to user'
 		
-		elif command == "load-shared-recipe":
+		elif command == "load-shared-node":
 			response["data"] = self.db.load_one_under_user(data)
 			response["status"] = bool(response["data"]) # True if data exists, False if data empty
 			if response["status"]:
-				print 'sent one shared recipe back to user'
+				print 'sent one shared node back to user'
 			else:
 				print 'problem finding shared recipe'
 

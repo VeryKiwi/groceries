@@ -74,9 +74,18 @@ function initTriggers() {
 
 	/* recipe area */
 	$('#create_meal_button').click(function(){
+		// If it's a shared meal address, fetch it. If not, create a new meal using the name they typed.
 		let inName = $('#meal_input').val();
-		let node = recipe.createNode('meal', inName);
-
+		let node
+		if (inName.includes('/')) {
+			console.log('has slash')
+			// fetch the shared meal
+			account.getSharedNode(inName)
+		}
+		else {
+			console.log('does NOT have slash')
+			node = recipe.createNode('meal', inName);
+		}
 		if (node) {
 			$('#meal_input').val(node.shownName) // Update in case it changed
 		}
@@ -92,7 +101,7 @@ function initTriggers() {
 		let key = event.which;
 		let character = String.fromCharCode(key);
 		let allowedKeys = [13] // special keys
-		let allowedChars = /[0-9A-Za-z _',:]/g;
+		let allowedChars = /[0-9A-Za-z _',:\/]/g;
 
 		if (allowedKeys.indexOf(key) != -1) return true
 		else if (character.match(allowedChars)) return true
@@ -207,7 +216,7 @@ function windowManage(cmds) {
 ////////////////////// MAIN //////////////////////
 $(document).ready(function(){
 	// jquery wait till dom loaded (see https://avaminzhang.wordpress.com/2013/06/11/document-ready-vs-window-load/ if any issues)
-	// NOTE: body is part of the DOM so it seems we do need to wait for document.ready before loading this. I don't know if we can do anything more in that regard.
+	// NOTE: body is part of the DOM so it seems we DO need to wait for document.ready before loading the background image. Dunno if we can do anything better than this.
 	initBackgroundImage() // This function does not use globals so I'm putting it first so that the background image can load as quickly as possible.
 	initGlobals()
 	initTriggers()
