@@ -98,7 +98,7 @@ class UserAccount {
 		})
 		$("#username").val("")
 		$("#password").val("")
-		// Import all of the users data from the server
+		// Import all of the user's data from the server
 		this.importData(inData.data)
 	}
 
@@ -123,12 +123,24 @@ class UserAccount {
 		this.serverLogin()
 	}
 
-	// Import ALL of the server's data for this user
-	importData(data) {
-		// While importing is happening, as nodes, etc. are created
-		// mute all outgoing messages
-		server.mute = true;
+	getSharedNode(inAddress) {
+		let outData = {'nodeAddress': inAddress}
+		server.send("load-shared-node", outData, this.importSharedNode.bind(this))
+	}
 
+	importSharedNode(inData) {
+		let success = inData.status
+		// Unsuccessful fetching of shared node
+		if (!success) {
+			alert('Shared info not found.')
+			return
+		}
+		// Shared data/node(s) was found successfully, so load it.
+		this.importDataInternal(inData.data)
+	}
+
+	// Import ALL of the server's data for this user
+	importDataInternal(data) {
 		// data should be an object whose keys are node IDs
 		// the contents of each should contain all required node information
 		for (let id in data) {
@@ -151,12 +163,20 @@ class UserAccount {
 				graph.addEdge(data[id1].node, data[id2].node)
 			}
 		}
+	}
+
+	importData(data) {
+		// While importing is happening, as nodes, etc. are created
+		// mute all outgoing messages
+		server.mute = true
+
+		this.importDataInternal(data)
 
 		server.mute = false
 
 		searchArea.launchSearch()
 	}
-
+	
 	// Log the user out
 	logout() {
 		server.send("logout", {})

@@ -6,9 +6,9 @@ from passlib.hash import argon2
 from mongo import Mongo
 
 class DB:
-	""" This class holds on direct functionality for maintaining and processing
+	""" This class holds direct functionality for maintaining and processing
 	the recipe database. It receives requests and interacts with the Mongo database
-	client"""
+	client."""
 
 	def __init__(self):
 		self.mongo = Mongo("groceries")
@@ -152,7 +152,6 @@ class DB:
 		#	edges
 		#	info
 		# 	<any additional fields relevant to that node>
-
 		data = {}
 
 		# First, ensure the user has already been set
@@ -161,12 +160,26 @@ class DB:
 
 		nodes = self.mongo.find_one("users", { "_id" : "u_" + self.username})["nodes"]
 		for node in nodes:
-			nodeDict = self.mongo.find_one("nodes", {"_id": self.getNodeId(node)})
-			nodeDict["shownName"] = nodeDict.pop("name") # change key to shownName
-			nodeDict.pop("_id") # don't need to include "_id" field
-			data[node] = nodeDict
+			data[node] = self.getNodeDict(self.username, node)
 
 		return data
+
+	def load_one_under_user(self, userData):
+		""" Read a single node owned by a specific user (used when somebody shares a recipe with someone else). """
+		splitvals = userData['nodeAddress'].split('/')
+		if len(splitvals) != 2:
+			return False
+		username, bareid = splitvals
+		return self.getNodeDict(username, bareid, strict=False)
+
+	def getNodeDict(self, username, node, strict=True):
+		""" Given username and bare node id ("node"), fetch the node from Mongo, clean/prep the dict, and return it. """
+		nodeDict = self.mongo.find_one("nodes", {"_id": self.getNodeId(node, username)})
+		if not strict and nodeDict is None:
+			return None
+		nodeDict["shownName"] = nodeDict.pop("name") # change key to shownName
+		nodeDict.pop("_id") # don't need to include "_id" field
+		return nodeDict
 
 	def add_node(self, userData):
 		""" add a node to the database """
@@ -265,16 +278,17 @@ class DB:
 		# First, ensure the user has already been set
 		if not self.username:
 			return False
-
 		nodeid = self.getNodeId(userData["id"])
 		info = userData["info"]
 		self.mongo.update("nodes", {"_id": nodeid},
 			{ "$set": {"info": info}})
-
-
 		return True
 
 	# Shortcut to generate the "_id" for a node based on its normal id
-	def getNodeId(self, id):
-		return "id_" + self.username + "_" + id
+	def getNodeId(self, bareid, username=None):
+		if username is None:
+			username = self.username
+		return "id_" + username + "_" + bareid
+
+
 

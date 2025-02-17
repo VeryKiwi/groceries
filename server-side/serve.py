@@ -98,6 +98,7 @@ class SocketHandler (WebSocketHandler):
 				print 'Failed to add user: ' + data['username']
 			# Send response to user query
 			response["status"] = success
+
 		elif command == "delete-user":
 			#Delete a user's account
 			success = self.db.delete_user(data)
@@ -150,6 +151,14 @@ class SocketHandler (WebSocketHandler):
 			response["status"] = True
 			response["data"] = self.db.load()
 			print 'Sent full data back to user'
+		
+		elif command == "load-shared-node":
+			response["data"] = self.db.load_one_under_user(data)
+			response["status"] = bool(response["data"]) # True if data exists, False if data empty
+			if response["status"]:
+				print 'sent one shared node back to user'
+			else:
+				print 'problem finding shared recipe'
 
 		# If a response is expected, send onem even if it's empty
 		if respond:
