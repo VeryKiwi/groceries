@@ -65,15 +65,19 @@ To install python2 deps, use `pip install -r requirements.txt`, since we have th
 
 
 
-## build
+## build the frontend
+
+For the frontend you need to run a build process to create an updated `client-side-built` directory from the `client-side` source directory:
 
 Make sure you are using the correct version of `node` and `gulp` (see above) before running the build:
 
     gulp
 
-On the server, gulp may throw an 'operation not permitted' error when you try to build.  This can be overrided with sudo:
+On the server, gulp may throw an "`operation not permitted`" error when you try to build.  This can be overrided with sudo:
 
     sudo gulp
+
+The last action in the default gulp actions is a `watch` action.  If you don't want it in prod, just ctrl-C out of it after everything is built.
 
 
 
