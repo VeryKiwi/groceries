@@ -150,7 +150,7 @@ function initTriggers() {
 
 function initBackgroundImage() {
 	// set random background for login screen
-	let image_bnames = ['charcuterie', 'figs', 'maki', 'masala', 'naan', 'pastry', 'peaches', 'peppers', 'pumpkin', 'steak', 'tea', 'wine']
+	let image_bnames = ['charcuterie', 'maki', 'masala', 'naan', 'pastry', 'pumpkin', 'steak', 'tea', 'wine']
 	//let image_bnames = ['maki']
 	let image_fnames = image_bnames.map((s) => s + '.webp')
 	let rand_index = Math.floor(Math.random() * image_fnames.length)
